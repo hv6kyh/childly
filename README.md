@@ -32,3 +32,53 @@ A와 B를 나열할 때 다음과 같은 규칙이 있다.
 트리 구조를 사용하면 편리하다.   
 
 ![tree](./tree.png)   
+*****
+Tree.java
+```java
+public void addChild(Node node, int n, int level) {
+
+  int a = countChar(node, 'A');
+  int b = countChar(node, 'B');
+
+  if (n > a) {
+    Node childNode = new Node("A");
+    node.setLeft(childNode);
+    childNode.setParent(node);
+    this.addChild(childNode, n, level+1);
+  }
+
+  if (a > b) {
+    Node childNode = new Node("B");
+    node.setRight(childNode);
+    childNode.setParent(node);
+    this.addChild(childNode, n, level+1);
+  }
+
+  if (level == n*2-1) {
+    lastList.add(node);
+  }
+
+}
+```
+위의 메소드는 어떤 노드에 대하여 조건에 따라   
+값이 A 또는 B인 자식 노드를 생성한다.   
+재귀 호출 방식으로 모든 노드를 생성하여 트리를 만든다.   
+*****
+Childly.java
+```java
+for (int j = 0; j < mask.length(); j++) {
+
+  switch (mask.charAt(j)) {
+
+  case 'A' :
+    stack.push(top++);
+    break;
+
+  case 'B' :
+    System.out.print(stack.pop() + " ");
+    break;
+
+  }
+
+}
+```
